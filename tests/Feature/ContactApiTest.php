@@ -50,14 +50,19 @@ it('returns create contact error when missing given name', function () {
 });
 
 it('returns an updated contact', function () {
-    $attributes = [
-        'given_name' => 'test',
-        'family_name' => 'test',
-        'nickname' => 'test',
-        'title' => 'test',
-    ];
-    $response = $this->put('/api/v1/contacts/1', $attributes);
-    $response->assertStatus(201);
+    $attributes = Contact::factory()->raw(['family_name'=>null]);
+
+    $response = $this->putJson('/api/v1/contacts/1', $attributes);
+    $response->assertStatus(201)
+        ->assertJsonStructure(
+            [
+                'id',
+                'given_name',
+                'family_name',
+                'nickname',
+                'title'
+            ],
+        );
     $this->assertDatabaseHas('contacts', $attributes);
 });
 
