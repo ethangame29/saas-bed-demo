@@ -16,7 +16,8 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $contacts = Contact::all();
+        $contacts = Contact::paginate(5)
+            ->toResourceCollection();
         return response()->json($contacts);
     }
 
@@ -35,7 +36,8 @@ class ContactController extends Controller
      */
     public function show(Contact $contact)
     {
-        return response()->json($contact);
+        $result = $contact->toResource();
+        return response()->json($result);
     }
 
     /**
