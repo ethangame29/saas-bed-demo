@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Return List of Users.
      */
     public function index()
     {
@@ -20,7 +20,7 @@ class UserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created User.
      */
     public function store(StoreUserRequest $request)
     {
@@ -30,7 +30,7 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Return the specified User.
      */
     public function show(User $user)
     {
@@ -38,7 +38,7 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified User.
      */
     public function update(UpdateUserRequest $request, User $user)
     {
@@ -48,7 +48,7 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified User.
      */
     public function destroy(User $user)
     {

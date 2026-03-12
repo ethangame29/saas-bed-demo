@@ -3,26 +3,30 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\DeleteContactRequest;
 use App\Http\Requests\StoreContactRequest;
 use App\Http\Requests\UpdateContactRequest;
+use App\Http\Resources\ContactResource;
 use App\Models\Contact;
-use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Return Paginated List of Contacts.
+     *
+     * Returns A paginated List of Contacts, currently there is no way to specify the pagination, it defaults to 5.
+     *
      */
     public function index()
     {
-        $contacts = Contact::paginate(5)
-            ->toResourceCollection();
-        return response()->json($contacts);
+        $contacts = Contact::paginate(5);
+        #    ->toResourceCollection();
+        #return response()->json($contacts);
+        return ContactResource::collection($contacts);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created Contact.
+     *
      */
     public function store(StoreContactRequest $request)
     {
@@ -32,7 +36,7 @@ class ContactController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Return the specified Contact.
      */
     public function show(Contact $contact)
     {
@@ -41,7 +45,7 @@ class ContactController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified Contact.
      */
     public function update(UpdateContactRequest $request, Contact $contact)
     {
@@ -51,7 +55,7 @@ class ContactController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified Contact.
      */
     public function destroy(Contact $contact)
     {
